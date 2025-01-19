@@ -10,39 +10,36 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background: url('\register1_enhanced.jpeg') no-repeat center center fixed;
+      background: url('Sports-Registration-form-template.png') no-repeat center center fixed;
       background-size: cover;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start; /* Align form to the left */
       align-items: center;
       height: 100vh;
-      color: #fff;
+      color: #0d0c0c;
     "
   >
-    <div
-      style="
-        background-color: rgba(0, 0, 0, 0.7);
-        padding: 2rem 3rem 2rem 2rem; /* Increased right-side padding */
-        border-radius: 10px;
-        width: 100%;
-        max-width: 400px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-      "
-    >
+  <div
+  style="
+    background-color: rgba(247, 146, 194, 0.7);
+    padding: 2rem 5rem 2rem 2rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 6px 10px rgba(72, 64, 64, 0.5);
+    margin-left: 100px; /* Add this line to move the form slightly to the right */
+  "
+>
       <form
         action="/register"
         method="POST"
-        style="
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        "
+        style="display: flex; flex-direction: column; gap: 1rem;"
       >
         <h1
           style="
             font-size: 2rem;
             margin-bottom: 1rem;
-            color: mediumslateblue;
+            color: rgb(28, 27, 27);
             text-align: center;
           "
         >
@@ -55,7 +52,7 @@
               display: block;
               margin-bottom: 0.5rem;
               font-weight: bold;
-              color: #fff;
+              color:rgb(28, 27, 27);
             "
             >Name:</label
           >
@@ -80,7 +77,7 @@
               display: block;
               margin-bottom: 0.5rem;
               font-weight: bold;
-              color: #fff;
+              color: rgb(28, 27, 27);
             "
             >Email:</label
           >
@@ -105,7 +102,7 @@
               display: block;
               margin-bottom: 0.5rem;
               font-weight: bold;
-              color: #fff;
+              color: rgb(28, 27, 27);
             "
             >Password:</label
           >
@@ -130,7 +127,7 @@
               display: block;
               margin-bottom: 0.5rem;
               font-weight: bold;
-              color: #fff;
+              color: rgb(28, 27, 27);
               width: 100%;
             "
             >Role:</label
@@ -156,12 +153,12 @@
             display: block; /* Centers the button */
             margin: 0 auto;
             padding: 0.8rem;
-            background-color: mediumslateblue;
+            background-color: rgb(104, 238, 124);
             border: none;
             border-radius: 5px;
             font-size: 1.2rem;
             font-weight: bold;
-            color: #333;
+            color: #f8f6f6;
             cursor: pointer;
             transition: all 0.3s ease;
           "
@@ -170,11 +167,11 @@
         >
           Register
         </button>
-        <p style="margin-top: 1rem; text-align: center; color: #ccc;">
+        <p style="margin-top: 1rem; text-align: center; color: black;">
           Already have an account?
           <a
             href="/login"
-            style="color: mediumslateblue; text-decoration: none; font-weight: bold;"
+            style="color: rgb(104, 238, 111); text-decoration: none; font-weight: bold;"
             onmouseover="this.style.textDecoration='underline';"
             onmouseout="this.style.textDecoration='none';"
             >Login</a
