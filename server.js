@@ -26,35 +26,35 @@ function isAuthenticated(req, res, next) {
 
 const preventJoiningPastSessions = async (req, res, next) => {
   try {
-    const sessionId = req.params.sessionId; // Assuming sessionId is passed in the route
-    console.log("Session ID received:", sessionId); // Log the session ID
+    const sessionId = req.params.sessionId; 
+    console.log("Session ID received:", sessionId); 
 
     const session = await pool.query(
       "SELECT * FROM sessions WHERE id = $1 AND date < NOW()",
       [sessionId]
     );
     if (!session) {
-      console.log("Session not found."); // Log if session does not exist
+      console.log("Session not found."); 
       return res.redirect("/player-dashboard");
     }
 
     const currentTime = new Date();
-    console.log("Current time:", currentTime); // Log the current time
-    console.log("Session date and time:", session.date); // Log the session date and time
+    console.log("Current time:", currentTime); 
+    console.log("Session date and time:", session.date); 
 
     if (new Date(session.date) < currentTime) {
-      console.log("The session has already passed."); // Log if session is in the past
+      console.log("The session has already passed."); 
       return res.redirect("/player-dashboard");
     }
 
     if (session.cancelled) {
-      console.log("The session has been cancelled."); // Log if session is cancelled
+      console.log("The session has been cancelled."); 
       return res.redirect("/player-dashboard");
     }
 
     next();
   } catch (error) {
-    console.error("Error in preventJoiningPastSessions middleware:", error); // Log any errors
+    console.error("Error in preventJoiningPastSessions middleware:", error); 
     return res.status(500).send("An error occurred.");
   }
 };
@@ -100,7 +100,7 @@ app.post("/register", async (req, res) => {
   res.redirect("/login");
 });
 app.get("/about-us", (req, res) => {
-  res.render("about-us"); // Ensure about-us.ejs exists in the "views" folder
+  res.render("about-us"); 
 });
 
 app.get("/admin-dashboard", isAuthenticated, async (req, res) => {
@@ -138,19 +138,13 @@ app.post("/create-sport", isAuthenticated, async (req, res) => {
   try {
     console.log("Received data from form:", req.body); // Log the form data
 
-    const { name } = req.body; // Get the sport name
+    const { name } = req.body; 
 
-    console.log("Sport name received:", name); // Log the extracted name
-
-    // Validate input
+    console.log("Sport name received:", name);
     if (!name || name.trim() === "") {
       return res.status(400).send("Sport name is required.");
     }
-
-    // Insert into database
     await pool.query("INSERT INTO sports (name) VALUES ($1)", [name.trim()]);
-
-    // Redirect to the admin dashboard
     res.redirect("/admin-dashboard");
   } catch (error) {
     console.error("Error creating sport:", error.message);
@@ -164,7 +158,7 @@ app.get("/logout", (req, res) => {
       console.error("Error destroying session:", err);
       return res.status(500).send("Error logging out");
     }
-    res.clearCookie("connect.sid"); // Clear the session cookie
+    res.clearCookie("connect.sid"); 
     res.redirect("/");
   });
 });
@@ -172,8 +166,6 @@ app.get("/logout", (req, res) => {
 app.post("/delete-session", isAuthenticated, async (req, res) => {
   try {
     const { session_id } = req.body;
-
-    // Ensure session_id is parsed correctly as an integer
     const sessionIdInt = parseInt(session_id);
 
     await pool.query("BEGIN");
