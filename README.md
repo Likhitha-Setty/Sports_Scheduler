@@ -65,3 +65,25 @@ Developed as the final project in WD501, the challenge was to create a fully fun
    ```bash
    git clone https://github.com/Likhitha-Setty/sports-scheduler.git
    ```
+2. **Set up the required dependencies and environment:**
+   Install all required packages with:
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the application locally for testing and development:**
+   ```bash
+   npm start
+   ```
+
+## Technologies Used 💻
+
+- **EJS** for templating dynamic HTML pages.
+- **HTML and CSS** for front-end design and styling.
+- **PostgreSQL** as the database for storing application data.
+- **Express.js** as the backend framework.
+
+## Acknowledgments 🙌
+
+This project was developed as part of the WD501 course. Special thanks to the instructors and course materials for providing valuable guidance throughout the development process.
