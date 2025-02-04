@@ -16,7 +16,6 @@
         color: #fff;
         transition: background 0.4s ease-in-out;
       }
-
       header {
         text-align: center;
         background: linear-gradient(45deg, rgba(70, 140, 8, 0.8), rgba(50, 80, 255, 0.8));
@@ -26,7 +25,6 @@
         box-shadow: 0 10px 10px rgba(23, 22, 22, 0.5);
         position: relative;
       }
-
       .logout-button {
         position: absolute;
         top: 50%;
@@ -40,7 +38,6 @@
         font-weight: bold;
         cursor: pointer;
       }
-
       .container {
         max-width: 1500px;
         margin: 0 auto;
@@ -49,7 +46,6 @@
         justify-content: space-between;
         gap: 5rem;
       }
-
       .left-section,
       .right-section {
         width: 48%;
@@ -64,7 +60,6 @@
         transform: translateY(-5px);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
       }
-
       .section-title {
         color: white;
         border-bottom: 2px solid white;
@@ -72,17 +67,14 @@
         margin-bottom: 1rem;
         transition: border-color 0.4s ease;
       }
-
       .form-group {
         margin-bottom: 2rem;
       }
-
       .form-group label {
         display: block;
         margin-bottom: 0.5rem;
         font-weight: bold;
       }
-
       .form-group input,
       .form-group select {
         width: 100%;
@@ -98,7 +90,6 @@
         background: rgba(255, 255, 255, 0.2);
         transform: scale(1.03);
       }
-
       .submit-button {
         background-color: white;
         color: #333;
@@ -114,20 +105,17 @@
         background: linear-gradient(45deg, #2f80ed, #56ccf2);
         transform: translateY(-3px);
       }
-
       .session-card {
         margin-bottom: 1.5rem;
         background-color: rgba(255, 255, 255, 0.1);
         padding: 1rem;
         border-radius: 5px;
       }
-
       .session-card ul {
         list-style: disc;
         margin-left: 1.5rem;
         color: white;
       }
-
       .session-button {
         background-color: white;
         color: #333;
@@ -142,7 +130,6 @@
         background: linear-gradient(45deg, #0575e6, #00f260);
         transform: scale(1.1);
       }
-
       .leave-button {
         background-color: #ff0000;
         color: #fff;
@@ -162,14 +149,11 @@
   <body>
     <header>
       <h1 style="font-size: 2.5rem; color: white;">Welcome, <%= user.name %></h1>
-      <!-- Logout Button -->
       <form action="/login" method="POST">
         <button type="submit" class="logout-button">Logout</button>
       </form>
     </header>
-
     <div class="container">
-      <!-- Left Section: Create Session Form -->
       <div class="left-section">
         <h2 class="section-title">Create Session</h2>
         <form action="/create-session" method="POST">
@@ -239,10 +223,7 @@
           <button type="submit" class="submit-button">Create Session</button>
         </form>
       </div>
-
-      <!-- Right Section: Joined Sessions & Available Sessions -->
       <div class="right-section">
-        <!-- Joined Sessions Section -->
         <h2 class="section-title">Joined Sessions</h2>
         <ul style="list-style: none; padding: 0;">
           <% joinedSessions.forEach(session => { %>
@@ -267,8 +248,6 @@
           </li>
           <% }) %>
         </ul>
-
-        <!-- Available Sessions Section -->
         <h2 class="section-title">Available Sessions</h2>
         <ul style="list-style: none; padding: 0;">
           <% sessions.forEach(session => { %>
