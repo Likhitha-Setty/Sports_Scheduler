@@ -32,7 +32,7 @@ Developed as the final project in WD501, the challenge was to create a fully fun
 - Joins existing sport sessions.
 - Manages created and joined sessions.
 
-![Player Dashboard](public/player.png)
+![Player Dashboard](player.png)
 
 ### User Stories in Action 🎬
 
@@ -44,8 +44,8 @@ Developed as the final project in WD501, the challenge was to create a fully fun
 
    - Enjoy a smooth onboarding experience with user-friendly forms.
 
-![Login Page](public/Screenshot_2024-02-10-09-34-21-759_com.brave.browser.jpg)
-![Register Page](public/Screenshot_2024-02-10-09-34-29-911_com.brave.browser.jpg)
+![Login Page](login.png)
+![Register Page](register.png)
 
 3. **Players can create a sport session:**
 
@@ -59,11 +59,9 @@ Developed as the final project in WD501, the challenge was to create a fully fun
 
    - Administrators enjoy the same seamless session creation.
 
-![Create Match](public/Screenshot_2024-02-10-09-34-43-911_com.brave.browser.jpg)
-
 ## Getting Started 🚀
 
 1. **Clone the repository to your local machine** using the following command:
    ```bash
-   git clone https://github.com/Setty-likhitha/sports-scheduler.git
+   git clone https://github.com/Likhitha-Setty/sports-scheduler.git
    ```
