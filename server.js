@@ -362,7 +362,6 @@ app.post("/cancel-session", isAuthenticated, async (req, res) => {
       console.log("Player not part of the session");
     }
 
-    // Redirect back to the dashboard
     res.redirect("/player-dashboard");
   } catch (err) {
     console.error("Error handling cancel session:", err);
