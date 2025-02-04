@@ -1,4 +1,4 @@
-# Sports Scheduler: Your Ultimate Sports Event Organizer 🏆
+# Sports Scheduler:Your Ultimate Sports Event Organizer 🏆
 
 ## Overview
 
