@@ -176,25 +176,19 @@ app.post("/delete-session", isAuthenticated, async (req, res) => {
     // Ensure session_id is parsed correctly as an integer
     const sessionIdInt = parseInt(session_id);
 
-    // Start a database transaction
     await pool.query("BEGIN");
 
-    // Delete associated records in session_players first
     await pool.query("DELETE FROM session_players WHERE session_id = $1", [
       sessionIdInt,
     ]);
 
-    // Delete the session from the sessions table
     await pool.query("DELETE FROM sessions WHERE id = $1", [sessionIdInt]);
 
-    // Commit the transaction
     await pool.query("COMMIT");
 
-    // Redirect to admin dashboard after successful deletion
     res.redirect("/admin-dashboard");
   } catch (error) {
-    // Rollback the transaction in case of an error
-    await pool.query("ROLLBACK");
+        await pool.query("ROLLBACK");
 
     console.error(error);
     res.status(500).send("Error deleting session");
@@ -295,15 +289,11 @@ app.post("/create-session", isAuthenticated, async (req, res) => {
 
 app.post("/join-session/:sessionId", isAuthenticated, async (req, res) => {
   try {
-    const { sessionId } = req.params; // Get sessionId from URL
+    const { sessionId } = req.params; 
     const userId = req.session.user.id;
-
-    // Check if session ID is valid
     if (!sessionId) {
       return res.status(400).send("Session ID is required.");
     }
-
-    // Check if user already joined
     const existing = await pool.query(
       "SELECT * FROM session_players WHERE session_id = $1 AND player_id = $2",
       [sessionId, userId]
@@ -317,14 +307,10 @@ app.post("/join-session/:sessionId", isAuthenticated, async (req, res) => {
           : "/player-dashboard"
       );
     }
-
-    // Insert into session_players
     await pool.query(
       "INSERT INTO session_players (session_id, player_id) VALUES ($1, $2)",
       [sessionId, userId]
     );
-
-    // Redirect to dashboard
     res.redirect(
       req.session.user.role === "admin"
         ? "/admin-dashboard"
@@ -337,7 +323,7 @@ app.post("/join-session/:sessionId", isAuthenticated, async (req, res) => {
 });
 
 app.post("/cancel-session", isAuthenticated, async (req, res) => {
-  const { session_id } = req.body; // Check the received session_id
+  const { session_id } = req.body; 
   const user_id = req.session.user.id;
 
   console.log("Cancel Session Endpoint Hit");
@@ -345,14 +331,12 @@ app.post("/cancel-session", isAuthenticated, async (req, res) => {
   console.log("User ID:", user_id);
 
   try {
-    // Check if the user is part of the session
     const sessionPlayer = await pool.query(
       "SELECT * FROM session_players WHERE session_id = $1 AND player_id = $2",
       [session_id, user_id]
     );
 
     if (sessionPlayer.rows.length > 0) {
-      // Remove the player from the session
       await pool.query(
         "DELETE FROM session_players WHERE session_id = $1 AND player_id = $2",
         [session_id, user_id]
