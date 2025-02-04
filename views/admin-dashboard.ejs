@@ -3,8 +3,196 @@
   <head>
     <meta charset="UTF-8" />
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="/styles.css" />
     <link rel="icon" href="/sports-icon.png" type="image/x-icon" />
+    <style>
+      /* Base Styling */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Roboto", Arial, sans-serif;
+        background-image: url('/blocks-fletcher-hGlBGfql5Kc-unsplash.jpg'); /* Replace with your background image path */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      header {
+        text-align: center;
+        padding: 20px;
+        background: linear-gradient(45deg, rgba(70, 140, 8, 0.8), rgba(50, 80, 255, 0.8));
+        color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        position: relative;
+      }
+
+      .logout {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+
+      .logout a {
+        background-color: #ede8ef;
+        color: black;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        font-weight: bold;
+      }
+
+      .logout a:hover {
+        background-color: #abed87;
+      }
+
+      .container.dashboard {
+        padding: 30px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        max-width: 1200px;
+        margin: 40px auto;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      }
+
+      h2 {
+        color: green;
+        border-bottom: 2px solid green;
+        display: inline-block;
+        margin-bottom: 20px;
+        font-size: 1.8em;
+        margin-top: 0;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 8px;
+        background: #e3f2fd;
+        border: 1px solid #90f9db;
+        font-size: 1.1em;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      li:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      li .cancelled {
+        color: #d32f2f;
+        font-weight: bold;
+      }
+
+      label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: bold;
+      }
+
+      input,
+      select,
+      button {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        max-width: 400px;
+        box-sizing: border-box;
+        font-size: 1em;
+      }
+
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: rgb(111, 170, 111);
+        box-shadow: 0 0 5px rgba(21, 192, 21, 0.5);
+      }
+
+      button {
+        background: green;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      button:hover {
+        background: rgb(0,128,0);
+        transform: translateY(-2px);
+      }
+
+      .report-link {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #4caf50; /* Green background */
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add some shadow for depth */
+}
+
+.report-link:hover {
+  background-color: #388e3c; /* Darker green on hover */
+  transform: translateY(-3px); /* Slight upward movement */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Increased shadow */
+}
+
+      form {
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #fafafa;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      form:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .content {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .content > div {
+        flex: 1;
+        min-width: 300px;
+        padding: 20px;
+        border-radius: 10px;
+        background: #f5f5f5;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Adjust layout for left side for Create Session */
+      .create-session {
+        order: -1;
+        width: 45%;
+      }
+
+      .all-sessions {
+        width: 50%;
+      }
+
+      /* Reduce the space between Create Sport and other content */
+      form.create-sport-form {
+        margin-bottom: 10px;
+      }
+    </style>
   </head>
   <body id="admin-dashboard">
     <header>
@@ -14,29 +202,51 @@
       <div class="logout">
         <a href="/logout">Logout</a>
       </div>
+      <div>
+        <h2>Sports</h2>
+        <ul>
+          <% sports.forEach(sport => { %>
+          <li><%= sport.name %></li>
+          <% }) %>
+        </ul>
+        <h2>Create Sport</h2>
+        <form action="/create-sport" method="POST" class="create-sport-form">
+          <label for="name">Sport Name:</label>
+          <input type="text" name="name" id="name" required />
+          <button type="submit">Create Sport</button>
+        </form>
+      </div>
       <section class="content">
-        <div>
-          <h2>Sports</h2>
-          <ul>
-            <% sports.forEach(sport => { %>
-            <li><%= sport.name %></li>
-            <% }) %>
-          </ul>
-          <h2>Create Sport</h2>
-          <form action="/create-sport" method="POST">
-            <label for="name">Sport Name:</label>
-            <input type="text" name="name" id="name" required />
-            <button type="submit">Create Sport</button>
+        <div class="create-session">
+          <h2>Create Session</h2>
+          <form action="/create-session" method="POST">
+            <label for="sport_id">Sport:</label>
+            <select name="sport_id" id="sport_id" required>
+              <% sports.forEach(sport => { %>
+              <option value="<%= sport.id %>"><%= sport.name %></option>
+              <% }) %>
+            </select>
+            <label for="team1">Team 1:</label>
+            <input type="text" name="team1" id="team1" required />
+            <label for="team2">Team 2:</label>
+            <input type="text" name="team2" id="team2" required />
+            <label for="additional_players">Additional Players:</label>
+            <input type="number" name="additional_players" id="additional_players" required />
+            <label for="date">Date:</label>
+            <input type="datetime-local" name="date" id="date" required />
+            <label for="venue">Venue:</label>
+            <input type="text" name="venue" id="venue" required />
+            <button type="submit">Create Session</button>
           </form>
         </div>
-        <div>
+        
+        <div class="all-sessions">
           <h2>All Sessions</h2>
           <ul>
             <% sessions.forEach(session => { %>
             <li>
               Sport: <%= session.sport_name %>, Teams: <%= session.team1 %> vs
-              <%= session.team2 %>, Date: <%= session.date %>, Venue: <%=
-              session.venue %>
+              <%= session.team2 %>, Date: <%= session.date %>, Venue: <%= session.venue %>
               <br />Created by: <%= session.creator_name %> <br />Players:
               <ul>
                 <% session.players.forEach(player => { %>
@@ -49,55 +259,15 @@
               </div>
               <% } %>
               <form action="/delete-session" method="POST">
-                <input
-                  type="hidden"
-                  name="session_id"
-                  value="<%= session.id %>"
-                />
+                <input type="hidden" name="session_id" value="<%= session.id %>" />
                 <button type="submit">Delete</button>
-                <form action="/join-session" method="POST">
-                  <input
-                    type="hidden"
-                    name="session_id"
-                    value="<%= session.id %>"
-                  />
-                  <button type="submit">Join</button>
-                </form>
               </form>
             </li>
             <% }) %>
           </ul>
         </div>
       </section>
-
-      <h2>Create Session</h2>
-      <form action="/create-session" method="POST">
-        <label for="sport_id">Sport:</label>
-        <select name="sport_id" id="sport_id" required>
-          <% sports.forEach(sport => { %>
-          <option value="<%= sport.id %>"><%= sport.name %></option>
-          <% }) %>
-        </select>
-        <label for="team1">Team 1:</label>
-        <input type="text" name="team1" id="team1" required />
-        <label for="team2">Team 2:</label>
-        <input type="text" name="team2" id="team2" required />
-        <label for="additional_players">Additional Players:</label>
-        <input
-          type="number"
-          name="additional_players"
-          id="additional_players"
-          required
-        />
-        <label for="date">Date:</label>
-        <input type="datetime-local" name="date" id="date" required />
-        <label for="venue">Venue:</label>
-        <input type="text" name="venue" id="venue" required />
-        <button type="submit">Create Session</button>
-      </form>
-
       <a href="/reports" class="report-link">View Reports</a>
     </div>
   </body>
-  
 </html>
