@@ -22,8 +22,8 @@ Developed as the final project in WD501, the challenge was to create a fully fun
 - Creates, edits, and deletes various sports options.
 - Accesses reports on games played.
 
-![Admin Dashboard](public/admin.png)
-![Admin Dashboard](public/admin2.png)
+![Admin Dashboard](admin.png)
+![Admin Dashboard](admin2.png)
 
 #### The Player 🏅
 
